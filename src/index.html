@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="box">
+      <span class="label">CPU (%)</span>
+      <span id="cpu"></span>
+    </div>
+    <div class="box">
+      <span class="label">Memory (%)</span>
+      <span id="mmy"></span>
+    </div>
+    <div class="box">
+      <span class="label">Total Memory (%)</span>
+      <span id="disk"></span>
+    </div>
+  </body>
+  <script>
+    const electron = require('electron');
+    const ipcRenderer = electron.ipcRenderer;
+
+    ipcRenderer.on('cpu', (event,data) => {
+      // console.log( 'CPU Usage (%): ', data );
+      document.getElementById('cpu').innerHTML = data.toFixed(2);
+    });
+    ipcRenderer.on('mmy', (event,data) => {
+    // console.log( 'Memory (%): ', data);
+    document.getElementById('mmy').innerHTML = data.toFixed(2);
+    });
+    ipcRenderer.on('disk', (event,data) => {
+    // console.log( 'Disk (%): ', data);
+    document.getElementById('disk').innerHTML = data.toFixed(2);
+    });
+  </script>
+</html>
